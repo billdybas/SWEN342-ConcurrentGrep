@@ -72,13 +72,16 @@ public class CGrep {
 				e.printStackTrace();
 			}
 
+			// Submit a new Callable to the CompletionService
 			completionService.submit(new MatchedCallable(regex, name, contents));
 		}
 
 		for (int i = 0; i < streams.keySet().size(); i++) {
 			try {
+				// Get the next task's Future or wait until the Future has finished execution
 				Future<Found> f = completionService.take();
 				Found matches = f.get();
+				// Print Out Each Match
 				for (String match: matches.getList()){
 					System.out.println(match);
 				}
