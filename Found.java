@@ -3,20 +3,22 @@ import java.util.List;
 
 public class Found {
 
-	public final String fileName;
-	private List<String> occurences;
-	
+	private final String filename;
+	private List<String> occurences = new ArrayList<String>();
+
 	public Found(String filename){
-		this.fileName = filename;
-		this.occurences = new ArrayList<String>();
+		this.filename = filename;
 	}
-	
-	public void addOcc(int lineNumber, String text){
-		occurences.add(lineNumber+" "+text);
+
+	public void addOccurance(int lineNumber, String text){
+		occurences.add(lineNumber + " " + text);
 	}
-	
+
+	public String getFilename() {
+		return filename;
+	}
+
 	public List<String> getList(){
 		return occurences;
 	}
-	
 }
