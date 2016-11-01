@@ -95,11 +95,10 @@ public class CGrep {
 				}
 			}
 		}else{
-			for(int i = 0; i > stdCount; i++){
 				try {
 					Future<Found> f = completionService.take();
 					Found matches = f.get();
-					System.out.println("Matches for "+matches.fileName+":");
+					System.out.println("Matches for StdIn");
 					for(String match : matches.getList()){
 						System.out.println(match);
 					}
