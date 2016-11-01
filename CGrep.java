@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 public class CGrep {
 
@@ -81,13 +82,23 @@ public class CGrep {
 				// Get the next task's Future or wait until the Future has finished execution
 				Future<Found> f = completionService.take();
 				Found matches = f.get();
+
 				// Print Out Each Match
+				System.out.println("Matches for: " + (matches.getFilename() != "" ? matches.getFilename() : "stdin"));
 				for (String match: matches.getList()){
 					System.out.println(match);
 				}
 			} catch (InterruptedException | ExecutionException e) {
 				e.printStackTrace();
 			}
+		}
+
+		// Shutdown the ExecutorService
+		executor.shutdown();
+		try {
+			executor.awaitTermination(5, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 }
