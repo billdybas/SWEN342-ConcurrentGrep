@@ -1,11 +1,12 @@
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorCompletionService;
+import java.util.concurrent.ExecutorService;
 
-public class CGrepExecutorService extends ExecutorCompletionService<Object>{
+public class CGrepExecutorService{
 
-	public CGrepExecutorService(Executor arg0) {
-		super(arg0);
-		// TODO Auto-generated constructor stub
+	private final ExecutorService executor;
+	
+	public CGrepExecutorService(ExecutorService executor){
+		this.executor = executor;
 	}
 
 }
