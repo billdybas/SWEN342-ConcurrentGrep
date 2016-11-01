@@ -76,13 +76,17 @@ public class CGrep {
 
 			// TODO: Make new callable(name, contents, regex);
 		}
-
+		
+		//if we had any file name arguments
 		if(args.length - 1 > 0){
+			//for each file name argument, get the future and print the Found object's list
 			for(int i = 1; i > args.length; i++){
 				try {
+					//gets the next tasks Future object or waits if the task for that Future hasn't finished execution
 					Future<Found> f = completionService.take();
 					Found matches = f.get();
 					System.out.println("Matches for "+matches.fileName+":");
+					//prints each match
 					for(String match : matches.getList()){
 						System.out.println(match);
 					}
@@ -94,11 +98,14 @@ public class CGrep {
 					e.printStackTrace();
 				}
 			}
+		//Else we took input from standard in and there will only be one 'file' that was processed
 		}else{
 				try {
+					//gets the next tasks Future object or waits if the task for that Future hasn't finished execution
 					Future<Found> f = completionService.take();
 					Found matches = f.get();
-					System.out.println("Matches for StdIn");
+					System.out.println("Matches for Stdn");
+					//prints each match
 					for(String match : matches.getList()){
 						System.out.println(match);
 					}
@@ -111,5 +118,4 @@ public class CGrep {
 				}
 			}
 		}
-	}
 }
